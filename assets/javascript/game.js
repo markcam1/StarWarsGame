@@ -13,7 +13,7 @@ $(document).ready(function() {
     var attackPower = 0;
     var isHeroChosen = false;
     
-    var healthPowerHero = 0;
+    var heroHealthPower = 0;
     var enemyHealth = 0;
     var attackPowerHero = 0;
     var counterAttackPower = 0;
@@ -31,21 +31,20 @@ $(document).ready(function() {
         isHeroChosen = false;
         // isCalculated = false;
 
-        healthPowerHero = 0;
+        heroHealthPower = 0;
         enemyHealth = 0;
         attackPowerHero = 0;
         counterAttackPower = 0;
 
       $("#first-number, #second-number, #operator, #result, #result_2").empty();
     }
+    
     function resetChallengerStats() {
-        newGame = false;
-        isHeroChosen = false;
-        // isCalculated = false;
-
-        enemyHealth = 200;
-        counterAttackPower = 5;
-        heroWins++;
+      newGame = false;
+      isHeroChosen = false;
+      // isCalculated = false;
+      heroWins++;
+      
 
     //   $("#first-number, #second-number, #operator, #result, #result_2").empty();
     }
@@ -71,10 +70,39 @@ $(document).ready(function() {
         hero1()
       }
       function hero1(){
-        healthPowerHero = 111;
+        heroHealthPower = 111;
         attackPowerHero = 5;
       }
       function challengerPower1(){
+        enemyHealth = 111;
+        counterAttackPower = 9;
+      }
+    })
+    $(".card").on("click", ".sky", function() {
+
+      // Check if we've already run a calculation, if so... we'll just.
+      // if (isCalculated) {
+      //   return false;
+      // }
+
+      // If operator is chosen, we should be writing the secondNumber, otherwise, the firstNumb
+
+      if (isHeroChosen === true) {
+          secondNumber = $(this).val();
+          $("#second-number").text(secondNumber);
+          challengerPower3()
+      }
+      else {
+        firstNumber = $(this).val();
+        isHeroChosen = true;
+        $("#first-number").text(firstNumber);
+        hero3()
+      }
+      function hero3(){
+        heroHealthPower = 222;
+        attackPowerHero = 5;
+      }
+      function challengerPower3(){
         enemyHealth = 111;
         counterAttackPower = 9;
       }
@@ -94,22 +122,16 @@ $(document).ready(function() {
         hero2()
       }
       function hero2(){
-        healthPowerHero = 333;
+        heroHealthPower = 333;
         attackPowerHero = 9;
       }
       function challengerPower2(){
         enemyHealth = 333;
         counterAttackPower = 2;
       }
-  
-
-      
-      
-      
-     
     }).on("click", ".kill", function() {
     //   isCalculated = true;
-    if (healthPowerHero <= 0) {
+    if (heroHealthPower <= 0) {
         
         resetAllGameStats();
         console.log("GAME OVER!\n PLAY AGAIN?");
@@ -119,15 +141,16 @@ $(document).ready(function() {
     else if (enemyHealth < 0 && heroWins <= 3) {   
         alert("YOU WIN!");
         resetChallengerStats();
+        gameMaster(secondNumber);
 
         //NEED NEXT BUTTON FUNCTION
     }
 
-    if (enemyHealth > 0 && healthPowerHero > 0){
-        healthPowerHero -= counterAttackPower;
+    if (enemyHealth > 0 && heroHealthPower > 0){
+        heroHealthPower -= counterAttackPower;
         enemyHealth -= attackPowerHero;
     
-        result = healthPowerHero;
+        result = heroHealthPower;
         result_2 = enemyHealth;
     
         attackPowerHero += 3;
@@ -146,6 +169,14 @@ $(document).ready(function() {
       console.log('test');
 
     });
+
+    function gameMaster(loser){
+      console.log(loser); 
+    }
+
+
+
+
 
     // Call initializeCalculater so we can set the state of our app
     // resetAllGameStats();
