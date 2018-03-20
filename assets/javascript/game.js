@@ -8,8 +8,6 @@ $(document).ready(function() {
     var operator = "minus";
     var result = 0;
     var result_2 = 0;
-    var isOperatorChosen = false;
-    // var isCalculated = false;
     var attackPower = 0;
     var isHeroChosen = false;
     
@@ -19,6 +17,7 @@ $(document).ready(function() {
     var counterAttackPower = 0;
     var heroWins = 0;
     readyFight = false;
+    playersInRing = 0;
 
     
     // Use a function to initialize our calculator.
@@ -27,36 +26,24 @@ $(document).ready(function() {
         newGame = true;
         firstNumber = 0;
         secondNumber = 0;
-        isOperatorChosen = false;
         isHeroChosen = false;
-        // isCalculated = false;
 
         heroHealthPower = 0;
         enemyHealth = 0;
         attackPowerHero = 0;
         counterAttackPower = 0;
+        playersInRing = 0;
 
       $("#first-number, #second-number, #operator, #result, #result_2").empty();
     }
-    
     function resetChallengerStats() {
       newGame = false;
       isHeroChosen = false;
-      // isCalculated = false;
       heroWins++;
-      
-
+      playersInRing--;
     //   $("#first-number, #second-number, #operator, #result, #result_2").empty();
     }
-
-    $(".card").on("click", ".empire", function() {
-
-      // Check if we've already run a calculation, if so... we'll just.
-      // if (isCalculated) {
-      //   return false;
-      // }
-
-      // If operator is chosen, we should be writing the secondNumber, otherwise, the firstNumb
+    $(".bench").on("click", ".lando", function() {
 
       if (isHeroChosen === true) {
           secondNumber = $(this).val();
@@ -68,6 +55,7 @@ $(document).ready(function() {
         isHeroChosen = true;
         $("#first-number").text(firstNumber);
         hero1()
+        moveHero(firstNumber);
       }
       function hero1(){
         heroHealthPower = 111;
@@ -79,14 +67,6 @@ $(document).ready(function() {
       }
     })
     $(".card").on("click", ".sky", function() {
-
-      // Check if we've already run a calculation, if so... we'll just.
-      // if (isCalculated) {
-      //   return false;
-      // }
-
-      // If operator is chosen, we should be writing the secondNumber, otherwise, the firstNumb
-
       if (isHeroChosen === true) {
           secondNumber = $(this).val();
           $("#second-number").text(secondNumber);
@@ -173,6 +153,25 @@ $(document).ready(function() {
     function gameMaster(loser){
       console.log(loser); 
     }
+    
+    function moveHero (playerToMove) {
+
+      if (playersInRing < 1) {
+        var movePlayerTxt = "." + playerToMove;
+        $( ".heroring" ).append($(movePlayerTxt));
+        console.log(playersInRing)
+        
+      }
+      else if (playersInRing >= 1 && playersInRing < 2) {
+        var movePlayerTxt = "." + playerToMove;
+        $( ".enemyring" ).append($(movePlayerTxt));
+        console.log(movePlayerTxt)
+        playersInRing++
+      }
+
+
+    }
+ 
 
 
 

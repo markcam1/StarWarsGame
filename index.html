@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Star Wars Battle</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cameron: Star Wars Games</title>
 
-<link rel="stylesheet" href="assets/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="assets/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,45 +16,42 @@
 <body>
 
 <div class="container">
-  <div class="row">
-    <!-- Calculator Panel -->
-    <div class="col-lg-4">
-      <div class="card">
-        <h3 class="card-header"></h3>
-
-        <div class="card-body">
-          <button id="button-1" class="btn btn-primary rebel" value="rebel"><h1>rebel</h1><p>hp</p><p id="rebheal">333</p></button>
-          <button id="button-2" class="btn btn-primary empire" value="emp"><h1>empire</h1><p>hp</p><p id="empheal">111</p></button>
-          <!-- <button id="button-multiply" class="btn btn-danger operator" value="times"><h1>&times;</h1></button> -->
-          <br><br>
-          <button id="button-0" class="btn btn-primary sky" value="sky"><h1>skywalker</h1><p>hp</p><p id="skyheal">222</p></button>
-          <!-- <button id="button-divide" class="btn btn-danger operator" value="divide"><h1>&divide;</h1></button>
-          <button id="button-power" class="btn btn-danger operator" value="power"><h1>^</h1></button> -->
-          <!-- <button id="button-minus" class="btn btn-danger operator" value="minus"><h1>-</h1></button> -->
-          <button id="button-kill" class="btn btn-success kill" value="kill"><h1>kill</h1></button>
-          <br><br>
-          <button id="button-clear" class="btn btn-dark clear" value="clear"><h1>clear</h1></button>
+    <row>
+        <div class="col-md-12">
+            top
         </div>
-      </div>
-    </div>
-
-    <!-- Result Panel -->
-    <div class="col-lg-6">
-      <div class="card">
-        <h3 class="card-header">Result</h3>
-        <div class="card-body">
-          <h1 id="first-number"></h1>
-          <h1 id="hwins"></h1>
-          <h1 id="second-number"></h1>
-          <hr>
-          <!-- <h1>hero h</h1> -->
-          <h1 id="result">_</h1>
-          <!-- <h1>enemy h</h1> -->
-          <h1 id="result_2">_</h1>
+    </row>
+    <div class="row">
+        <div class="bench">
+            <div class="col-md-3">
+                <button id="button-1" class="btn btn-primary lando" value="lando"><img src="assets/images/lando.jpg" alt="lando" height="142" width="142"><br><p id="landohealth">333</p></button>
+            </div>
+            <div class="col-md-3">
+                <button id="button-2" class="btn btn-primary empire" value="emp"><img src="assets/images/sw.png" alt="lando" height="142" width="142"><br><p id="empheal">111</p></button>
+            </div>
+            <div class="col-md-3">
+                <div class="test">
+                    THREE
+                </div>
+            </div>
+            <div class="col-md-3">
+                four
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="heroring">
+                FIGHT
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="enemyring">
+                FIGHT
+            </div>
+        </div>
+    </div>
 </div>
-
-<script type="text/javascript">
+    
+</body>
+</html>
