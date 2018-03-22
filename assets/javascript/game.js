@@ -33,7 +33,6 @@ $(document).ready(function() {
     secondUserChoice = 0;
     playersInRing = 1;
     $( "#wincount" ).text(heroWins);
-
   //   $("#first-number").empty();
   }
 
@@ -48,7 +47,7 @@ $(document).ready(function() {
     else {
       firstUserChoice = $(this).val();
       setHeroStats(playerStatsObject, firstUserChoice);
-      $("#howto").text("Choose your challenger");
+      $("#howto").text("Choose your challenger")
     }
 
     function setHeroStats(obj, item){
@@ -149,8 +148,8 @@ $(document).ready(function() {
     $( ".coffin" ).append($(removeLoserTxt));
     $(removeLoserTxt).prop("disabled", true);
     $("#howto").text("Choose your challenger");
-    heroWins++;
     resetChallengerStats();
+    heroWins++;
   }
   function movePlayers (playerToMove) {
     if (playersInRing < 1) {
