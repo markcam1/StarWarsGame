@@ -1,0 +1,16 @@
+body {
+    background-image: url(../images/bg1.jpg);
+}
+
+#header, h1 {
+    font-family: 'Poller One', cursive;
+    color: lightblue;
+}
+#howto, #wincount, #scoretext {
+    font-family: 'Poller One', cursive;
+    color: lightblue;
+}
+#button-kill {
+    font-family: 'Poller One', cursive;
+    color: lightblue;
+}

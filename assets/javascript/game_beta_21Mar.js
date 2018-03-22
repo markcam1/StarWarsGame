@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   // global variables 
-  var gameOver = false; 
+  var newGame = true; 
   var firstUserChoice = 0;
   var secondUserChoice = 0;
   var scorePlayer1 = 0;
@@ -17,21 +17,33 @@ $(document).ready(function() {
   var killPress = 0;
 
   var playerStatsObject = {
-    lando: {pow: {healthNum: 115, attackNum: 22, counterAttackNum: 38}},
-    hutt: {pow: {healthNum: 140, attackNum: 20, counterAttackNum: 15}},
-    rey: {pow: {healthNum: 130, attackNum: 25, counterAttackNum: 20}},
-    vader: {pow: {healthNum: 142, attackNum: 18, counterAttackNum: 15}}
+    lando: {pow: {healthNum: 1003, attackNum: 07, counterAttackNum: 15}},
+    hutt: {pow: {healthNum: 115, attackNum: 05, counterAttackNum: 10}},
+    rey: {pow: {healthNum: 102, attackNum: 04, counterAttackNum: 23}},
+    vader: {pow: {healthNum: 100, attackNum: 05, counterAttackNum: 20}}
   }
 
   //reset game stats without reload; unused
-  $("#reload").on("click", function reloadPage(event) {
-    location.reload();
-  });
+  function resetAllGameStats() {
+      newGame = true;
+      firstUserChoice = 0;
+      secondUserChoice = "";
+      isHeroChosen = false;
+      heroHealthPower = 0;
+      enemyHealth = 0;
+      attackPowerHero = 0;
+      counterAttackPower = 0;
+      playersInRing = 0;
+
+    $("#first-number, #second-number, #operator, #scorePlayer1, #scorePlayer2").empty();
+  }
 
   //reset enemy stats after loss
   function resetChallengerStats() {
+    newGame = false;
     secondUserChoice = 0;
     playersInRing = 1;
+    console.log("reset: " + playersInRing);
     $( "#wincount" ).text(heroWins);
 
   //   $("#first-number").empty();
@@ -84,16 +96,15 @@ $(document).ready(function() {
   $(".ringarea").on("click", ".kill", function() {
     console.log("killBtn: " + firstUserChoice);
     console.log("killBtn: " + secondUserChoice);
+  if (heroHealthPower <= 0) {
+    gameScore();
+  }
+  else if (enemyHealth < 0 && heroWins <= 3) {   
+    gameScore();
+  }
 
-    if (heroHealthPower <= 0) {
-      gameScore();
-    }
-    else if (enemyHealth < 0 && heroWins <= 3) {   
-      gameScore();
-    }
-
-    if (enemyHealth > 0 && heroHealthPower > 0){
-      
+  if (enemyHealth > 0 && heroHealthPower > 0){
+    
       heroHealthPower -= counterAttackPower;
       enemyHealth -= attackPowerHero;
       scorePlayer1 = heroHealthPower;
@@ -104,51 +115,36 @@ $(document).ready(function() {
       numIncrement = attackPowerHero/killPress;
       attackPowerHero += numIncrement;
   
-      // console.log("killBtn inc:" + numIncrement);
-      // console.log("killBtn at: " + attackPowerHero);
-    }
+      console.log("killBtn inc:" + numIncrement);
+      console.log("killBtn at: " + attackPowerHero);
+      
+  }
     var scoreBoard1 = "#health_" + firstUserChoice;
     var scoreBoard2 = "#health_" + secondUserChoice;
     $(scoreBoard1).text(scorePlayer1);
     $(scoreBoard2).text(scorePlayer2);
-
-    gameScore();
+    setTimeout(gameScore, 2000);
+  })
 
     function gameScore(){
-      if (enemyHealth <= 0 && enemyHealth < heroHealthPower) {
-        graveDigger(secondUserChoice);
+      if (enemyHealth <= 0 && heroWins <= 3 && enemyHealth < heroHealthPower) {   
+        playerKiller(secondUserChoice);
         $(".kill").prop("disabled", true);
       }
       if (heroHealthPower <= 0 && heroHealthPower < enemyHealth) {
-        killHero();
-        displayFinal();
-      }
-      if (heroHealthPower <= 0) {
-        killHero(); 
-        displayFinal();
-      }
-      displayFinal();
-      function displayFinal (){
-        if (heroHealthPower < 0 || enemyHealth < 0){
-            $("#playoneresult").text("Your final health is " + heroHealthPower);
-            $("#playtworesult").text("The challenger's final health is " + enemyHealth);
+        $(".kill").prop("disabled", true);
+        var playAgain = confirm("Of course you lost.\n Play again?");
+        if (playAgain === true){
+          location.reload();
         }
       }
     }
-  })
 
-  function killHero (){
-    $(".kill").prop("disabled", true);
-    $("#howto").text("Play again?");
-    gameOver = true;
-    $("#reload").show("slow");
-  }
 
-  function graveDigger(loser){
+  function playerKiller(loser){
     var removeLoserTxt = "#" + loser;
     $( ".coffin" ).append($(removeLoserTxt));
     $(removeLoserTxt).prop("disabled", true);
-    $("#howto").text("Choose your challenger");
     heroWins++;
     resetChallengerStats();
   }
@@ -157,13 +153,13 @@ $(document).ready(function() {
       var movePlayerTxt = "#" + playerToMove;
       $( ".heroring" ).append($(movePlayerTxt));
       playersInRing++
+      console.log("mv ls1: " + playersInRing);
     }
-    else if (playersInRing >= 1 && gameOver === false) {
-      console.log("mv: " + gameOver)
+    else if (playersInRing >= 1) {
       var movePlayerTxt = "#" + playerToMove;
       $( ".enemyring" ).append($(movePlayerTxt));
-      $( "#playoneresult, #playtworesult" ).empty();
       playersInRing++
+      console.log("mv gt1: " + playersInRing);
     }
   }
 });

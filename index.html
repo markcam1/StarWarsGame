@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cameron: Star Wars Games</title>
+    <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poller+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+</head>
+<body>
+
+<audio autoplay loop>
+    <source src="assets/audio/imperial_march.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 id=header>Star Wars Battle</h1>
+            <h2 id="mc">Cameron Edition</h2>
+        </div>
+    </div class="row">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h2 id="howto">Choose Your Hero</h2>>
+        </div>
+        <div class="col-md-6 text-center">
+            <h2 id=scoretext>Wins: <span id="wincount">0</span></h2>
+        </div>
+        <br>
+    </div class="row">
+    <div class="row">
+        <div class="bench text-center">
+            <div class="col-md-3">
+                <button id="lando" class="btn btn-info player" value="lando"><p>Lando</p><img src="assets/images/lando_1.jpg" alt="lando" height="130" width="130"><br><p id="health_lando">set</p></button>
+            </div>
+            <div class="col-md-3">
+                <button id="hutt" class="btn btn-info player" value="hutt"><p>Jabba</p><img src="assets/images/hutt_1.jpg" alt="hutt" height="130" width="130"><br><p id="health_hutt">set</p></button>
+            </div>
+            <div class="col-md-3">
+                <div class="test">
+                    <button id="rey" class="btn btn-info player" value="rey"><p>Rey</p><img src="assets/images/rey_1.jpg" alt="rey" height="130" width="130"><br><p id="health_rey">set</p></button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button id="vader" class="btn btn-info player" value="vader"><p>Vader</p><img src="assets/images/vader_1.jpg" alt="vader" height="130" width="130"><br><p id="health_vader">set</p></button>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="row">
+        <div class="ringarea">
+            <div class="col-md-4 text-center">
+                <div class="heroring">
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="row">
+                    <button id="button-kill" class="btn btn-danger kill" value="kill"><h1>KILL</h1></button>
+                </div>
+                <br>
+                <div class="row">
+                    <p id=playoneresult></p>
+                    <p id=playtworesult></p>
+                </div>
+                <div class="row">
+                    <div class="playagain">
+                        <button type="button" class="btn btn-success" id="reload">Play Again</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="enemyring">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <img src="assets/images/grave_1.png" class="img-responsive" alt="Responsive image">
+        </div>
+        <div class="col-md-6">
+            <div class="coffin">
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>

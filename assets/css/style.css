@@ -1,3 +1,20 @@
 body {
     background-image: url(../images/bg1.jpg);
 }
+
+#header, h1 {
+    font-family: 'Poller One', cursive;
+    color: white;
+}
+#howto, #wincount, #scoretext, #playoneresult, #playtworesult, #mc  {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+}
+#button-kill {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: black;
+}
+
+#reload {
+    display: none;
+}
