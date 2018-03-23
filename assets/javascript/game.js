@@ -17,10 +17,10 @@ $(document).ready(function() {
   var killPress = 0;
 
   var playerStatsObject = {
-    lando: {pow: {healthNum: 115, attackNum: 22, counterAttackNum: 38}},
-    hutt: {pow: {healthNum: 140, attackNum: 20, counterAttackNum: 15}},
-    rey: {pow: {healthNum: 130, attackNum: 25, counterAttackNum: 20}},
-    vader: {pow: {healthNum: 142, attackNum: 18, counterAttackNum: 15}}
+    lando: {pow: {healthNum: 113, attackNum: 15, counterAttackNum: 16}},
+    hutt: {pow: {healthNum: 130, attackNum: 07, counterAttackNum: 17}},
+    rey: {pow: {healthNum: 143, attackNum: 10, counterAttackNum: 15}},
+    vader: {pow: {healthNum: 160, attackNum: 08, counterAttackNum: 19}}
   }
 
   //reset game stats without reload; unused
@@ -32,7 +32,7 @@ $(document).ready(function() {
   function resetChallengerStats() {
     secondUserChoice = 0;
     playersInRing = 1;
-    $( "#wincount" ).text(heroWins);
+    
   //   $("#first-number").empty();
   }
 
@@ -40,17 +40,18 @@ $(document).ready(function() {
   $(".bench").on("click", ".player", function() {
     if (isHeroChosen === true) {
       secondUserChoice = $(this).val();
-      setHeroStats(playerStatsObject, secondUserChoice);
+      setPlayerStats(playerStatsObject, secondUserChoice);
       $(".kill").prop("disabled", false);
-      $("#howto").text("Fight!");
+      $("#howto").text("Fight!").css("color", "red");
     }
     else {
       firstUserChoice = $(this).val();
-      setHeroStats(playerStatsObject, firstUserChoice);
-      $("#howto").text("Choose your challenger")
+      setPlayerStats(playerStatsObject, firstUserChoice);
+      $("#howto").text("Choose your challenger").css("color", "green");
     }
 
-    function setHeroStats(obj, item){
+    //get object and unpack data 
+    function setPlayerStats(obj, item){
       for (key in obj){
         if (key == item){
           startHealth = obj[key].pow.healthNum;
@@ -66,6 +67,7 @@ $(document).ready(function() {
       }
     }
 
+    //set health and attack numbers
     function setHero(startHealth, startAttack){
       heroHealthPower = startHealth;
       attackPowerHero = startAttack;
@@ -73,6 +75,7 @@ $(document).ready(function() {
       movePlayers(firstUserChoice);
     }
     
+    //set health and attack numbers
     function setEnemy(startHealth, startCounterAttack){
       enemyHealth = startHealth;
       counterAttackPower = startCounterAttack;
@@ -80,10 +83,8 @@ $(document).ready(function() {
     }
   })
 
+  // button function for attack and main play
   $(".ringarea").on("click", ".kill", function() {
-    console.log("killBtn: " + firstUserChoice);
-    console.log("killBtn: " + secondUserChoice);
-
     if (heroHealthPower <= 0) {
       gameScore();
     }
@@ -92,19 +93,17 @@ $(document).ready(function() {
     }
 
     if (enemyHealth > 0 && heroHealthPower > 0){
-      
       heroHealthPower -= counterAttackPower;
       enemyHealth -= attackPowerHero;
       scorePlayer1 = heroHealthPower;
       scorePlayer2 = enemyHealth;
+      $("#playoneresult").text("You attacked " + secondUserChoice + " for " + attackPowerHero + " damage.");
+      $("#playtworesult").text(secondUserChoice +  "attacked you back for " + counterAttackPower + " damage.");
     
       var numIncrement = 0;
       killPress++
       numIncrement = attackPowerHero/killPress;
       attackPowerHero += numIncrement;
-  
-      // console.log("killBtn inc:" + numIncrement);
-      // console.log("killBtn at: " + attackPowerHero);
     }
     var scoreBoard1 = "#health_" + firstUserChoice;
     var scoreBoard2 = "#health_" + secondUserChoice;
@@ -113,17 +112,18 @@ $(document).ready(function() {
 
     gameScore();
 
+    //check if game has ended
     function gameScore(){
-      if (enemyHealth <= 0 && enemyHealth < heroHealthPower) {
+      if (heroHealthPower <= 0) {
+        killHero(); 
+        displayFinal();
+      }
+      if (enemyHealth <= 0 && heroHealthPower > 0) {
         graveDigger(secondUserChoice);
         $(".kill").prop("disabled", true);
       }
       if (heroHealthPower <= 0 && heroHealthPower < enemyHealth) {
         killHero();
-        displayFinal();
-      }
-      if (heroHealthPower <= 0) {
-        killHero(); 
         displayFinal();
       }
       displayFinal();
@@ -136,6 +136,7 @@ $(document).ready(function() {
     }
   })
 
+  //stop game for user
   function killHero (){
     $(".kill").prop("disabled", true);
     $("#howto").text("Play again?");
@@ -143,14 +144,21 @@ $(document).ready(function() {
     $("#reload").show("slow");
   }
 
+  //send the losing character away and update stats
   function graveDigger(loser){
     var removeLoserTxt = "#" + loser;
     $( ".coffin" ).append($(removeLoserTxt));
     $(removeLoserTxt).prop("disabled", true);
-    $("#howto").text("Choose your challenger");
+    $("#howto").text("Choose your challenger").css("color", "blue");
     resetChallengerStats();
-    heroWins++;
+    if (!gameOver){
+      heroWins++;
+      $( "#wincount" ).text(heroWins);
+    }
   }
+
+
+  //move characters around the DOM
   function movePlayers (playerToMove) {
     if (playersInRing < 1) {
       var movePlayerTxt = "#" + playerToMove;
