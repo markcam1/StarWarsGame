@@ -23,7 +23,7 @@ This is a simple example suited for JavaScript beginners.
 You will be starting with the initial code. 
 
 ```
-If you want to changes navigate to the JavaScript file (assets/javascript/) and change the code. 
+If you want to make changes navigate to the JavaScript file (assets/javascript/) and change the code. 
 ```
 
 ## Built With
